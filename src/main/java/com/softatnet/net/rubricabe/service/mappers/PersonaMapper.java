@@ -50,6 +50,7 @@ public class PersonaMapper {
     public static RemovePersonaResponse removePersonaResponseFromPersonaEntity(PersonaEntity personaEntity) {
         RemovePersonaResponse removePersonaResponse = new RemovePersonaResponse();
         removePersonaResponse.setCodiceFiscale(personaEntity.getCodiceFiscale());
+        removePersonaResponse.setMessage("Persona rimossa con successo");
         return removePersonaResponse;
     }
 

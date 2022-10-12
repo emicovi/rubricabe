@@ -41,17 +41,7 @@ public class PersonaBusinessLogic {
     //the database
 
     public RemovePersonaResponse removePersona(RemovePersonaRequest request) {
-        RemovePersonaResponse response = new RemovePersonaResponse();
-        if (!personaValidationService.validateRequestCf(request.getCodiceFiscale())) {
-            response.setError(true);
-            response.setMessage("Errore");
-        } else {
-            response = personaService.deletePersonaById(request);
-            response.setError(false);
-            response.setMessage("La persona con codice" + request.getCodiceFiscale() + " è stata eliminata");
-        }
-
-        return response;
+        return personaService.deletePersonaById(request);
     }
 
 

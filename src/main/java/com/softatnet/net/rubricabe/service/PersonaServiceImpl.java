@@ -32,6 +32,21 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
+    public RemovePersonaResponse deletePersonaById(RemovePersonaRequest personaRequest) {
+        PersonaEntity personaEntity = PersonaMapper.personaEntityFromRemovePersonaRequest(personaRequest);
+        if(personaRepository.findById(personaEntity.getCodiceFiscale()).isPresent()){
+            personaRepository.deleteById(personaEntity.getCodiceFiscale());
+            return PersonaMapper.removePersonaResponseFromPersonaEntity(personaEntity);
+        }
+        else {
+            RemovePersonaResponse removePersonaResponse = new RemovePersonaResponse();
+            removePersonaResponse.setError(true);
+            removePersonaResponse.setMessage("Persona non presente");
+            return removePersonaResponse;
+        }
+    }
+
+    @Override
     public EditPersonaResponse updatePersona(EditPersonaRequest personaRequest) {
         PersonaEntity personaEntity = PersonaMapper.personaEntityFromEditPersonaRequest(personaRequest);
         personaRepository.save(personaEntity);
@@ -39,12 +54,6 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
 
-    @Override
-    public RemovePersonaResponse deletePersonaById(RemovePersonaRequest personaRequest) {
-        PersonaEntity personaEntity = PersonaMapper.personaEntityFromRemovePersonaRequest(personaRequest);
-        personaRepository.deleteById(personaEntity.getCodiceFiscale());
-        return PersonaMapper.removePersonaResponseFromPersonaEntity(personaEntity);
-    }
 
     public List<PersonaEntity> getAllPersonas() {
         return (List<PersonaEntity>) personaRepository.findAll();
