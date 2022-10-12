@@ -8,7 +8,8 @@ public class AddPersonaResponse {
 
 
 
-        public Boolean getError() {
+
+    public Boolean getError() {
             return error;
         }
 

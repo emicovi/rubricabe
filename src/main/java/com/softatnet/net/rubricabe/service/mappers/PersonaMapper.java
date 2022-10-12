@@ -20,6 +20,7 @@ public class PersonaMapper {
     public static AddPersonaResponse addPersonaResponseFromPersonaEntity(PersonaEntity personaEntity) {
         AddPersonaResponse addPersonaResponse = new AddPersonaResponse();
         addPersonaResponse.setCodiceFiscale(personaEntity.getCodiceFiscale());
+        addPersonaResponse.setMessage("Persona aggiunta con successo");
         return addPersonaResponse;
     }
 

@@ -19,18 +19,7 @@ public class PersonaBusinessLogic {
     }
 
     public AddPersonaResponse addPersona(AddPersonaRequest request) {
-        AddPersonaResponse response = new AddPersonaResponse();
-        if (!personaValidationService.validateRequest(request)) {
-            response.setError(true);
-            response.setMessage("Errore");
-        } else {
-            response = personaService.savePersona(request);
-            response.setError(false);
-            response.setCodiceFiscale(request.getCodiceFiscale());
-            response.setMessage("Ciao " + request.getNome() + " " + request.getCognome() + " " + request.getEmail() + " " + request.getTelefono() + " " + request.getCodiceFiscale());
-        }
-
-        return response;
+        return personaService.savePersona(request);
     }
 
     public EditPersonaResponse editPersona(EditPersonaRequest request) {

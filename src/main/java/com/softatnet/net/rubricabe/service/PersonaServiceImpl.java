@@ -21,6 +21,12 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     public AddPersonaResponse savePersona(AddPersonaRequest addPersonaRequest) {
         PersonaEntity personaEntity = PersonaMapper.personaEntityFromAddPersonaRequest(addPersonaRequest);
+        if(personaRepository.findById(personaEntity.getCodiceFiscale()).isPresent()){
+            AddPersonaResponse addPersonaResponse = new AddPersonaResponse();
+            addPersonaResponse.setError(true);
+            addPersonaResponse.setMessage("Persona già presente");
+            return addPersonaResponse;
+        }
         personaRepository.save(personaEntity);
         return PersonaMapper.addPersonaResponseFromPersonaEntity(personaEntity);
     }
