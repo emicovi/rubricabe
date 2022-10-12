@@ -19,7 +19,14 @@ public class PersonaBusinessLogic {
     }
 
     public AddPersonaResponse addPersona(AddPersonaRequest request) {
-        return personaService.savePersona(request);
+        if (personaValidationService.validateRequest(request)) {
+            return personaService.savePersona(request);
+        } else {
+            AddPersonaResponse response = new AddPersonaResponse();
+            response.setError(true);
+            response.setMessage("Persona non valida");
+            return response;
+        }
     }
 
     public EditPersonaResponse editPersona(EditPersonaRequest request) {
@@ -77,16 +84,6 @@ public class PersonaBusinessLogic {
     //exists in the database
 
     public SearchPersonaByNameResponse searchPersonaByName(SearchPersonaByNameRequest request) {
-        SearchPersonaByNameResponse response = new SearchPersonaByNameResponse();
-        if (!personaValidationService.validateRequestName(request.getNome())) {
-            response.setError(true);
-            response.setMessage("Errore");
-        } else {
-            response = personaService.findPersonaByName(request);
-            response.setError(false);
-            response.setMessage("La persona con nome" + request.getNome() + " è stata trovata");
-        }
-
-        return response;
+       return personaService.findPersonaByName(request);
     }
 }

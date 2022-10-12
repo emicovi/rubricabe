@@ -20,4 +20,5 @@ public interface PersonaService {
     GetAllPersonasResponse findAllPersonas();
 
     SearchPersonaByNameResponse findPersonaByName(SearchPersonaByNameRequest request);
+
 }

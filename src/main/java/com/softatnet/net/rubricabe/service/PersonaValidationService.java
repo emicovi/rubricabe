@@ -9,7 +9,10 @@ import org.springframework.stereotype.Component;
 @Component public class PersonaValidationService {
 
         public boolean validateRequest(PersonaRequest request) {
-            return request.getNome() != null && request.getCognome() != null && request.getEmail() != null && request.getTelefono() != null && request.getCodiceFiscale() != null;
+            if (request.getNome() == null || request.getNome().isEmpty() || request.getCognome() == null || request.getCognome().isEmpty() || request.getCodiceFiscale() == null || request.getCodiceFiscale().isEmpty() || request.getTelefono() == null || request.getTelefono().isEmpty()) {
+                return false;
+            }
+            return true;
         }
 
         public boolean validateRequestCf(String codiceFiscale) {

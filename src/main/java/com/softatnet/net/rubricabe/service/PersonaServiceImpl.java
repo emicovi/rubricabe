@@ -25,6 +25,7 @@ public class PersonaServiceImpl implements PersonaService {
             AddPersonaResponse addPersonaResponse = new AddPersonaResponse();
             addPersonaResponse.setError(true);
             addPersonaResponse.setMessage("Persona già presente");
+            addPersonaResponse.setCodiceFiscale(personaEntity.getCodiceFiscale());
             return addPersonaResponse;
         }
         personaRepository.save(personaEntity);
@@ -54,12 +55,6 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
 
-
-    public List<PersonaEntity> getAllPersonas() {
-        return (List<PersonaEntity>) personaRepository.findAll();
-    }
-
-
     @Override
     public SearchPersonaResponse findPersonaById(SearchPersonaRequest personaRequest) {
         PersonaEntity personaEntity = PersonaMapper.personaEntityFromSearchPersonaRequest(personaRequest);
@@ -69,8 +64,15 @@ public class PersonaServiceImpl implements PersonaService {
 
     public SearchPersonaByNameResponse findPersonaByName(SearchPersonaByNameRequest personaRequest) {
         PersonaEntity personaEntity = PersonaMapper.personaEntityFromSearchPersonaByNameRequest(personaRequest);
-        personaRepository.findById(personaRequest.getNome());
-        return PersonaMapper.searchPersonaByNameResponseFromPersonaEntity(personaEntity);
+        if(personaRepository.existsByNome(personaRequest.getNome())){
+            return PersonaMapper.searchPersonaByNameResponseFromPersonaEntity(personaEntity);
+        }
+        else {
+            SearchPersonaByNameResponse searchPersonaByNameResponse = new SearchPersonaByNameResponse();
+            searchPersonaByNameResponse.setError(true);
+            searchPersonaByNameResponse.setMessage("Persona non presente");
+            return searchPersonaByNameResponse;
+        }
     }
 
     @Override

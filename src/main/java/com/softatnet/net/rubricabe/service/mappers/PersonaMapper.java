@@ -81,6 +81,7 @@ public class PersonaMapper {
 
     public static SearchPersonaByNameResponse searchPersonaByNameResponseFromPersonaEntity(PersonaEntity personaEntity) {
         SearchPersonaByNameResponse searchPersonaByNameResponse = new SearchPersonaByNameResponse();
+        searchPersonaByNameResponse.setMessage("Persona trovata con successo");
         return searchPersonaByNameResponse;
     }
 }
