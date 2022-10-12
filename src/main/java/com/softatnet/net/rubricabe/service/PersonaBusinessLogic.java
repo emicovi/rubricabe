@@ -93,4 +93,21 @@ public class PersonaBusinessLogic {
         response.setMessage("Tutte le persone sono state trovate");
         return response;
     }
+
+    //method that search a person by name if the person
+    //exists in the database
+
+    public SearchPersonaByNameResponse searchPersonaByName(SearchPersonaByNameRequest request) {
+        SearchPersonaByNameResponse response = new SearchPersonaByNameResponse();
+        if (!personaValidationService.validateRequestName(request.getNome())) {
+            response.setError(true);
+            response.setMessage("Errore");
+        } else {
+            response = personaService.findPersonaByName(request);
+            response.setError(false);
+            response.setMessage("La persona con nome" + request.getNome() + " è stata trovata");
+        }
+
+        return response;
+    }
 }

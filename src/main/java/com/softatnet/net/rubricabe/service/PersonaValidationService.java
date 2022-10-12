@@ -15,4 +15,8 @@ import org.springframework.stereotype.Component;
         public boolean validateRequestCf(String codiceFiscale) {
             return codiceFiscale != null || codiceFiscale.isEmpty();
         }
+
+    public boolean validateRequestName(String nome) {
+        return nome != null || nome.isEmpty();
+    }
 }

@@ -52,6 +52,12 @@ public class PersonaServiceImpl implements PersonaService {
         return PersonaMapper.searchPersonaResponseFromPersonaEntity(personaEntity);
     }
 
+    public SearchPersonaByNameResponse findPersonaByName(SearchPersonaByNameRequest personaRequest) {
+        PersonaEntity personaEntity = PersonaMapper.personaEntityFromSearchPersonaByNameRequest(personaRequest);
+        personaRepository.findById(personaRequest.getNome());
+        return PersonaMapper.searchPersonaByNameResponseFromPersonaEntity(personaEntity);
+    }
+
     @Override
     public GetAllPersonasResponse findAllPersonas() {
         List<PersonaEntity> personaEntityList = (List<PersonaEntity>) personaRepository.findAll();

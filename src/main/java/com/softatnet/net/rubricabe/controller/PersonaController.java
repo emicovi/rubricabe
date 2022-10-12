@@ -13,8 +13,6 @@ public class PersonaController {
 
     private PersonaBusinessLogic personaBusinessLogic;
 
-    private PersonaRepository personaRepository;
-
 
     public PersonaController(PersonaBusinessLogic personaBusinessLogic) {
         this.personaBusinessLogic = personaBusinessLogic;
@@ -49,6 +47,11 @@ public class PersonaController {
     @PostMapping("/search")
     public SearchPersonaResponse searchPersona(@RequestBody SearchPersonaRequest request) {
         return personaBusinessLogic.searchPersona(request);
+    }
+
+    @PostMapping("/searchByName")
+    public SearchPersonaByNameResponse searchPersonaByName(@RequestBody SearchPersonaByNameRequest request) {
+        return personaBusinessLogic.searchPersonaByName(request);
     }
 
 }

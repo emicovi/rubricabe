@@ -70,4 +70,15 @@ public class PersonaMapper {
         getAllPersonasResponse.setPersonaEntityList(personaEntityList);
         return getAllPersonasResponse;
     }
+
+    public static PersonaEntity personaEntityFromSearchPersonaByNameRequest(SearchPersonaByNameRequest personaRequest) {
+        PersonaEntity personaEntity = new PersonaEntity();
+        personaEntity.setNome(personaRequest.getNome());
+        return personaEntity;
+    }
+
+    public static SearchPersonaByNameResponse searchPersonaByNameResponseFromPersonaEntity(PersonaEntity personaEntity) {
+        SearchPersonaByNameResponse searchPersonaByNameResponse = new SearchPersonaByNameResponse();
+        return searchPersonaByNameResponse;
+    }
 }
