@@ -18,6 +18,12 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
+    public List<PersonaDTO> getPersonaByName(String nome) {
+        List<PersonaEntity> personaEntityList = personaRepository.findByNome(nome);
+        return PersonaMapper.fromListPersonaEntity(personaEntityList);
+    }
+
+    @Override
     public PersonaDTO getPersonaByCodiceFiscale(String codiceFiscale) {
         PersonaEntity personaEntity = personaRepository.findByCodiceFiscale(codiceFiscale);
         return PersonaMapper.fromPersonaEntity(personaEntity);

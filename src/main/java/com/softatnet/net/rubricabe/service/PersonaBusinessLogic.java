@@ -137,4 +137,15 @@ public class PersonaBusinessLogic {
         return response;
     }
 
+    public ListaPersoneResponse getPersonaByName (SearchPersonaRequest request) {
+        ListaPersoneResponse response = new ListaPersoneResponse();
+        List<PersonaDTO> persone = personaService.getPersonaByName(request.getPersona().getNome());
+        response.setPersone(persone);
+        response.setError(false);
+        response.setMessage("Tutte le persone sono state trovate");
+        return response;
+    }
+
+
+
 }

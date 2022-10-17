@@ -25,8 +25,7 @@ public interface PersonaService {
     PersonaDTO getPersonaByCodiceFiscale(String codiceFiscale);
     Boolean isPersonaPresent(String codiceFiscale);
 
-   // SearchPersonaResponse findPersonaById(SearchPersonaRequest personaRequest);
-
+    List<PersonaDTO> getPersonaByName(String nome);
     List<PersonaDTO> findAllPersonas();
 
     //SearchPersonaByNameResponse findPersonaByName(SearchPersonaByNameRequest request);

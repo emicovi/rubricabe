@@ -47,13 +47,13 @@ public class PersonaController {
         return personaBusinessLogic.searchPersonaByCodiceFiscale(request);
     }
 
-    /*
+
     @PostMapping("/searchByName")
-    public SearchPersonaByNameResponse searchPersonaByName(@RequestBody SearchPersonaByNameRequest request) {
-        return personaBusinessLogic.searchPersonaByName(request);
+    public ListaPersoneResponse searchPersonaByName(@RequestBody SearchPersonaRequest request) {
+        return personaBusinessLogic.getPersonaByName(request);
     }
 
-     */
+
 
 }
 
