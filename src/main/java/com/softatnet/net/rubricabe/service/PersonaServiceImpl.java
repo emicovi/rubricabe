@@ -34,6 +34,13 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
+    public PersonaDTO editPersona(PersonaDTO personaDTO) {
+        PersonaEntity personaEntity = PersonaMapper.toPersonaEntity(personaDTO);
+        personaRepository.save(personaEntity);
+        return PersonaMapper.fromPersonaEntity(personaEntity);
+    }
+
+    @Override
     public Boolean isPersonaPresent(String codiceFiscale) {
         if(personaRepository.findById(codiceFiscale).isPresent()){
             return true;

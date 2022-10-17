@@ -17,10 +17,10 @@ public interface PersonaService {
     //save operation
     PersonaDTO savePersona(PersonaDTO personaDTO);
     //update operation
-   // EditPersonaResponse updatePersona(EditPersonaRequest personaRequest);
-    //delete operation
+
     PersonaDTO removePersona(PersonaDTO PersonaDTO);
     //read operation
+    PersonaDTO editPersona(PersonaDTO personaDTO);
 
     Boolean isPersonaPresent(String codiceFiscale);
 

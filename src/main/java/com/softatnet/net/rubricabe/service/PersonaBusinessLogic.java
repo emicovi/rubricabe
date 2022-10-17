@@ -79,6 +79,30 @@ public class PersonaBusinessLogic {
         }
     }
 
+    public EditPersonaResponse editPersona(EditPersonaRequest request) {
+        if (personaValidationService.validateRequest(request.getPersona())) {
+            if (personaService.isPersonaPresent(request.getPersona().getCodiceFiscale())) {
+                PersonaDTO personaDTO = personaService.savePersona(request.getPersona());
+                EditPersonaResponse response = new EditPersonaResponse();
+                response.setError(false);
+                response.setMessage("Persona modificata");
+                response.setPersona(personaDTO);
+                return response;
+            } else {
+                EditPersonaResponse response = new EditPersonaResponse();
+                response.setError(true);
+                response.setMessage("Persona non presente");
+                response.setPersona(response.getPersona());
+                return response;
+            }
+        } else {
+            EditPersonaResponse response = new EditPersonaResponse();
+            response.setError(true);
+            response.setMessage("Persona non valida");
+            return response;
+        }
+    }
+
 
     //get all persons
     public ListaPersoneResponse getAllPersonas() {

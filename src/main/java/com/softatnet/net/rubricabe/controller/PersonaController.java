@@ -39,13 +39,11 @@ public class PersonaController {
         return personaBusinessLogic.removePersona(request);
     }
 
-    /*
-
     @PostMapping("/edit")
     public EditPersonaResponse editPersona(@RequestBody EditPersonaRequest request) {
         return personaBusinessLogic.editPersona(request);
     }
-*/
+
     /*
     @PostMapping("/search")
     public SearchPersonaResponse searchPersona(@RequestBody SearchPersonaRequest request) {

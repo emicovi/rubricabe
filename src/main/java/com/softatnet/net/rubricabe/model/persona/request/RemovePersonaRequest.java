@@ -9,15 +9,6 @@ public class RemovePersonaRequest {
         private PersonaDTO persona;
 
 
-
-    public void setCodiceFiscale(String codiceFiscale) {
-        this.codiceFiscale = codiceFiscale;
-    }
-
-    public String getCodiceFiscale() {
-        return codiceFiscale;
-    }
-
     public PersonaDTO getPersona() {
         return persona;
     }
