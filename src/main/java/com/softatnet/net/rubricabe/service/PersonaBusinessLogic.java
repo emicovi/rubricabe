@@ -5,10 +5,7 @@ import com.softatnet.net.rubricabe.model.persona.request.AddPersonaRequest;
 import com.softatnet.net.rubricabe.model.persona.request.EditPersonaRequest;
 import com.softatnet.net.rubricabe.model.persona.request.RemovePersonaRequest;
 import com.softatnet.net.rubricabe.model.persona.request.SearchPersonaRequest;
-import com.softatnet.net.rubricabe.model.persona.response.AddPersonaResponse;
-import com.softatnet.net.rubricabe.model.persona.response.EditPersonaResponse;
-import com.softatnet.net.rubricabe.model.persona.response.ListaPersoneResponse;
-import com.softatnet.net.rubricabe.model.persona.response.RemovePersonaResponse;
+import com.softatnet.net.rubricabe.model.persona.response.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -73,6 +70,32 @@ public class PersonaBusinessLogic {
             }
         } else {
             RemovePersonaResponse response = new RemovePersonaResponse();
+            response.setError(true);
+            response.setMessage("Persona non valida");
+            return response;
+        }
+    }
+
+    //search persona by codiceFiscale
+
+    public SearchPersonaResponse searchPersonaByCodiceFiscale(SearchPersonaRequest request) {
+        if (personaValidationService.validateRequestCf(request.getPersona().getCodiceFiscale())) {
+            if (personaService.isPersonaPresent(request.getPersona().getCodiceFiscale())) {
+                PersonaDTO personaDTO = personaService.getPersonaByCodiceFiscale(request.getPersona().getCodiceFiscale());
+                SearchPersonaResponse response = new SearchPersonaResponse();
+                response.setError(false);
+                response.setMessage("Persona trovata");
+                response.setPersona(personaDTO);
+                return response;
+            } else {
+                SearchPersonaResponse response = new SearchPersonaResponse();
+                response.setError(true);
+                response.setMessage("Persona non presente");
+                response.setPersona(response.getPersona());
+                return response;
+            }
+        } else {
+            SearchPersonaResponse response = new SearchPersonaResponse();
             response.setError(true);
             response.setMessage("Persona non valida");
             return response;

@@ -21,7 +21,8 @@ public interface PersonaService {
     PersonaDTO removePersona(PersonaDTO PersonaDTO);
     //read operation
     PersonaDTO editPersona(PersonaDTO personaDTO);
-
+    //get person by codiceFiscale
+    PersonaDTO getPersonaByCodiceFiscale(String codiceFiscale);
     Boolean isPersonaPresent(String codiceFiscale);
 
    // SearchPersonaResponse findPersonaById(SearchPersonaRequest personaRequest);

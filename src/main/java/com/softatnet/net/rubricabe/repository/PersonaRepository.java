@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PersonaRepository extends CrudRepository<PersonaEntity, String> {
 
-    boolean existsByNome(String nome);
+        boolean existsByNome(String nome);
 
+        PersonaEntity findByCodiceFiscale(String codiceFiscale);
 }

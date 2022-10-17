@@ -6,4 +6,12 @@ public class SearchPersonaRequest  {
 
     private PersonaDTO persona;
 
+    public PersonaDTO getPersona() {
+        return persona;
+    }
+
+    public void setPersona(PersonaDTO persona) {
+        this.persona = persona;
+    }
+
 }

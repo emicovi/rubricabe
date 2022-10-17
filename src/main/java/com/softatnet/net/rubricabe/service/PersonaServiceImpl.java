@@ -17,6 +17,11 @@ public class PersonaServiceImpl implements PersonaService {
         this.personaRepository = personaRepository;
     }
 
+    @Override
+    public PersonaDTO getPersonaByCodiceFiscale(String codiceFiscale) {
+        PersonaEntity personaEntity = personaRepository.findByCodiceFiscale(codiceFiscale);
+        return PersonaMapper.fromPersonaEntity(personaEntity);
+    }
 
     @Override
     public PersonaDTO savePersona(PersonaDTO personaDTO) {

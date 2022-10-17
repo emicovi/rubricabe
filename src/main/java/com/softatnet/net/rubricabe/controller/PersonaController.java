@@ -5,10 +5,7 @@ import com.softatnet.net.rubricabe.model.persona.request.AddPersonaRequest;
 import com.softatnet.net.rubricabe.model.persona.request.EditPersonaRequest;
 import com.softatnet.net.rubricabe.model.persona.request.RemovePersonaRequest;
 import com.softatnet.net.rubricabe.model.persona.request.SearchPersonaRequest;
-import com.softatnet.net.rubricabe.model.persona.response.AddPersonaResponse;
-import com.softatnet.net.rubricabe.model.persona.response.EditPersonaResponse;
-import com.softatnet.net.rubricabe.model.persona.response.ListaPersoneResponse;
-import com.softatnet.net.rubricabe.model.persona.response.RemovePersonaResponse;
+import com.softatnet.net.rubricabe.model.persona.response.*;
 import com.softatnet.net.rubricabe.service.PersonaBusinessLogic;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,12 +41,12 @@ public class PersonaController {
         return personaBusinessLogic.editPersona(request);
     }
 
-    /*
+
     @PostMapping("/search")
     public SearchPersonaResponse searchPersona(@RequestBody SearchPersonaRequest request) {
-        return personaBusinessLogic.searchPersona(request);
+        return personaBusinessLogic.searchPersonaByCodiceFiscale(request);
     }
-*/
+
     /*
     @PostMapping("/searchByName")
     public SearchPersonaByNameResponse searchPersonaByName(@RequestBody SearchPersonaByNameRequest request) {
