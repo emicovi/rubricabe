@@ -1,10 +1,12 @@
-package com.softatnet.net.rubricabe.model;
+package com.softatnet.net.rubricabe.model.persona.response;
+
+import com.softatnet.net.rubricabe.model.persona.PersonaDTO;
 
 public class AddPersonaResponse {
 
         private Boolean error=false;
         private String message;
-        private String codiceFiscale;
+        private PersonaDTO persona;
 
 
 
@@ -25,12 +27,11 @@ public class AddPersonaResponse {
             this.message = message;
         }
 
-
-    public String getCodiceFiscale() {
-        return codiceFiscale;
+    public PersonaDTO getPersona() {
+        return persona;
     }
 
-    public void setCodiceFiscale(String codiceFiscale) {
-        this.codiceFiscale = codiceFiscale;
+    public void setPersona(PersonaDTO persona) {
+        this.persona = persona;
     }
 }

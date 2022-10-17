@@ -1,6 +1,8 @@
-package com.softatnet.net.rubricabe.model;
+package com.softatnet.net.rubricabe.model.persona.response;
 
-public class EditPersonaResponse extends PersonaResponse {
+import com.softatnet.net.rubricabe.model.BaseResponse;
+
+public class EditPersonaResponse extends BaseResponse {
 
     private String codiceFiscale;
 

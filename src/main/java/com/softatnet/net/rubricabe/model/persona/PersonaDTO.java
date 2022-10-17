@@ -1,6 +1,6 @@
-package com.softatnet.net.rubricabe.model;
+package com.softatnet.net.rubricabe.model.persona;
 
-public class PersonaRequest {
+public class PersonaDTO {
 
 
         private String nome;

@@ -1,6 +1,6 @@
 package com.softatnet.net.rubricabe.model;
 
-public class PersonaResponse {
+public class BaseResponse {
 
         private Boolean error=false;
         private String message;

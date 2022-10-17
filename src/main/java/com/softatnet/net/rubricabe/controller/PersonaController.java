@@ -1,9 +1,14 @@
 package com.softatnet.net.rubricabe.controller;
 
 
-import com.softatnet.net.rubricabe.entity.PersonaEntity;
-import com.softatnet.net.rubricabe.model.*;
-import com.softatnet.net.rubricabe.repository.PersonaRepository;
+import com.softatnet.net.rubricabe.model.persona.request.AddPersonaRequest;
+import com.softatnet.net.rubricabe.model.persona.request.EditPersonaRequest;
+import com.softatnet.net.rubricabe.model.persona.request.RemovePersonaRequest;
+import com.softatnet.net.rubricabe.model.persona.request.SearchPersonaRequest;
+import com.softatnet.net.rubricabe.model.persona.response.AddPersonaResponse;
+import com.softatnet.net.rubricabe.model.persona.response.EditPersonaResponse;
+import com.softatnet.net.rubricabe.model.persona.response.ListaPersoneResponse;
+import com.softatnet.net.rubricabe.model.persona.response.RemovePersonaResponse;
 import com.softatnet.net.rubricabe.service.PersonaBusinessLogic;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,18 +24,13 @@ public class PersonaController {
     }
 
 
-    @GetMapping("nome/{name}")
-    public String personaPath(@PathVariable String name) {
-        return "Hello " + name;
-    }
-
     @PostMapping("/add")
     public AddPersonaResponse addPersona(@RequestBody AddPersonaRequest request) {
         return personaBusinessLogic.addPersona(request);
     }
 
-    @GetMapping("/get")
-    public GetAllPersonasResponse getAllPersonas() {
+    @GetMapping("/getAll")
+    public ListaPersoneResponse getAllPersonas() {
         return personaBusinessLogic.getAllPersonas();
     }
 
@@ -39,20 +39,26 @@ public class PersonaController {
         return personaBusinessLogic.removePersona(request);
     }
 
+    /*
+
     @PostMapping("/edit")
     public EditPersonaResponse editPersona(@RequestBody EditPersonaRequest request) {
         return personaBusinessLogic.editPersona(request);
     }
-
+*/
+    /*
     @PostMapping("/search")
     public SearchPersonaResponse searchPersona(@RequestBody SearchPersonaRequest request) {
         return personaBusinessLogic.searchPersona(request);
     }
-
+*/
+    /*
     @PostMapping("/searchByName")
     public SearchPersonaByNameResponse searchPersonaByName(@RequestBody SearchPersonaByNameRequest request) {
         return personaBusinessLogic.searchPersonaByName(request);
     }
+
+     */
 
 }
 

@@ -1,8 +1,17 @@
 package com.softatnet.net.rubricabe.service;
 
-import com.softatnet.net.rubricabe.model.*;
-import com.softatnet.net.rubricabe.service.mappers.PersonaMapper;
+import com.softatnet.net.rubricabe.model.persona.PersonaDTO;
+import com.softatnet.net.rubricabe.model.persona.request.AddPersonaRequest;
+import com.softatnet.net.rubricabe.model.persona.request.EditPersonaRequest;
+import com.softatnet.net.rubricabe.model.persona.request.RemovePersonaRequest;
+import com.softatnet.net.rubricabe.model.persona.request.SearchPersonaRequest;
+import com.softatnet.net.rubricabe.model.persona.response.AddPersonaResponse;
+import com.softatnet.net.rubricabe.model.persona.response.EditPersonaResponse;
+import com.softatnet.net.rubricabe.model.persona.response.ListaPersoneResponse;
+import com.softatnet.net.rubricabe.model.persona.response.RemovePersonaResponse;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Component
@@ -18,9 +27,24 @@ public class PersonaBusinessLogic {
         this.personaService = personaService;
     }
 
+    // Add Persona
+
     public AddPersonaResponse addPersona(AddPersonaRequest request) {
-        if (personaValidationService.validateRequest(request)) {
-            return personaService.savePersona(request);
+        if (personaValidationService.validateRequest(request.getPersona())) {
+            if (personaService.isPersonaPresent(request.getPersona().getCodiceFiscale())) {
+                AddPersonaResponse response = new AddPersonaResponse();
+                response.setError(true);
+                response.setMessage("Persona duplicata");
+                response.setPersona(response.getPersona());
+                return response;
+            } else {
+                PersonaDTO personaDTO = personaService.savePersona(request.getPersona());
+                AddPersonaResponse response = new AddPersonaResponse();
+                response.setError(false);
+                response.setMessage("Persona inserita");
+                response.setPersona(personaDTO);
+                return response;
+            }
         } else {
             AddPersonaResponse response = new AddPersonaResponse();
             response.setError(true);
@@ -29,61 +53,41 @@ public class PersonaBusinessLogic {
         }
     }
 
-    public EditPersonaResponse editPersona(EditPersonaRequest request) {
-        EditPersonaResponse response = new EditPersonaResponse();
-        if (!personaValidationService.validateRequest(request)) {
-            response.setError(true);
-            response.setMessage("Errore");
-        } else {
-            response = personaService.updatePersona(request);
-            response.setError(false);
-            response.setCodiceFiscale(request.getCodiceFiscale());
-            response.setMessage("La persona con codice" + request.getCodiceFiscale() + " è stata modificata");
-        }
-
-        return response;
-    }
-
-    //method that deletes a person if the person exists in
-    //the database
+    //remove Persona
 
     public RemovePersonaResponse removePersona(RemovePersonaRequest request) {
-        return personaService.deletePersonaById(request);
-    }
-
-
-
-    //method that searches a person by id if the person exists in
-    //the database
-
-    public SearchPersonaResponse searchPersona(SearchPersonaRequest request) {
-        SearchPersonaResponse response = new SearchPersonaResponse();
-        if (!personaValidationService.validateRequestCf(request.getCodiceFiscale())) {
-            response.setError(true);
-            response.setMessage("Errore");
+        if (personaValidationService.validateRequest(request.getPersona())) {
+            if (personaService.isPersonaPresent(request.getPersona().getCodiceFiscale())) {
+                PersonaDTO personaDTO = personaService.removePersona(request.getPersona());
+                RemovePersonaResponse response = new RemovePersonaResponse();
+                response.setError(false);
+                response.setMessage("Persona rimossa");
+                response.setPersona(personaDTO);
+                return response;
+            } else {
+                RemovePersonaResponse response = new RemovePersonaResponse();
+                response.setError(true);
+                response.setMessage("Persona non presente");
+                response.setPersona(response.getPersona());
+                return response;
+            }
         } else {
-            response = personaService.findPersonaById(request);
-            response.setError(false);
-            response.setMessage("La persona con codice" + request.getCodiceFiscale() + " è stata trovata");
+            RemovePersonaResponse response = new RemovePersonaResponse();
+            response.setError(true);
+            response.setMessage("Persona non valida");
+            return response;
         }
-
-        return response;
     }
 
-    //method that returns all the persons in the database
 
-    public GetAllPersonasResponse getAllPersonas() {
-        GetAllPersonasResponse response = new GetAllPersonasResponse();
-        response = personaService.findAllPersonas();
+    //get all persons
+    public ListaPersoneResponse getAllPersonas() {
+        ListaPersoneResponse response = new ListaPersoneResponse();
+        List<PersonaDTO> persone = personaService.findAllPersonas();
+        response.setPersone(persone);
         response.setError(false);
         response.setMessage("Tutte le persone sono state trovate");
         return response;
     }
 
-    //method that search a person by name if the person
-    //exists in the database
-
-    public SearchPersonaByNameResponse searchPersonaByName(SearchPersonaByNameRequest request) {
-       return personaService.findPersonaByName(request);
-    }
 }
